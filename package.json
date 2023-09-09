@@ -1,0 +1,33 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "library and books",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "live-server",
+    "build": "rollup -c --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ramiras123/library_project.git"
+  },
+  "keywords": [
+    "books",
+    "library",
+    "search",
+    "book"
+  ],
+  "author": "Aleksandr Smirnov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ramiras123/library_project/issues"
+  },
+  "homepage": "https://github.com/Ramiras123/library_project#readme",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.1",
+    "eslint": "^8.49.0",
+    "rollup": "^3.29.0",
+    "rollup-plugin-import-css": "^3.3.1"
+  }
+}

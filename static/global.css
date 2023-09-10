@@ -1,0 +1,14 @@
+:root {
+  --black: #121212;
+  --white: #fafafa;
+}
+
+body {
+  color: var(--black);
+  font-family: "Open Sans", sans-serif;
+}
+
+#root {
+  max-width: 800px;
+  margin: 0 auto;
+}

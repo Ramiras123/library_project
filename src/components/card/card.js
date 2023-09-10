@@ -24,9 +24,11 @@ export class Card extends DivComponent {
     );
     this.el.innerHTML = `
         <div class="card__img"> 
-            <img src="https://covers.openlibrary.org/b/olid/${
-              this.cardState.cover_edition_key
-            }-M.jpg" alt='Обложка'/>
+        <a href="#card?id=${
+          this.cardState.cover_edition_key
+        }"><img src="https://covers.openlibrary.org/b/olid/${
+      this.cardState.cover_edition_key
+    }-M.jpg" alt='Обложка'/></a>
         </div>
         <div class="card__info">
             <div class="card__tag">

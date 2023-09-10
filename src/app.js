@@ -1,4 +1,4 @@
-import { CardView } from "./views/card_discription/card_discription";
+import { DescriptionView } from "./views/description/description";
 import { FavoritesView } from "./views/favorites/favorites";
 import { MainView } from "./views/main/main";
 
@@ -6,11 +6,10 @@ class App {
   routes = [
     { path: "", view: MainView },
     { path: "#favorites", view: FavoritesView },
-    { path: "#card", view: CardView },
+    { path: "#card", view: DescriptionView },
   ];
   appState = {
     favorites: [],
-    cardId: null,
   };
   constructor() {
     window.addEventListener("hashchange", this.route.bind(this));
@@ -20,7 +19,15 @@ class App {
     if (this.currentView) {
       this.currentView.destroy();
     }
-    const view = this.routes.find((r) => r.path == location.hash).view;
+    const hash = location.hash;
+    const view = this.routes.find((r) => {
+      if (r.path === "#card") {
+        const params = new URLSearchParams(hash.split("?")[1]);
+        return hash.includes(r.path) && params.has("id");
+      } else {
+        return r.path == hash;
+      }
+    }).view;
     this.currentView = new view(this.appState);
     this.currentView.render();
   }

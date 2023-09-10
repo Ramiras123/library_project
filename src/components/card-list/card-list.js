@@ -7,6 +7,7 @@ export class CardList extends DivComponent {
   constructor(appState, parentState) {
     super();
     this.appState = appState;
+    
     this.parentState = parentState;
   }
 
@@ -20,7 +21,6 @@ export class CardList extends DivComponent {
     const cardGrid = document.createElement("div");
     cardGrid.classList.add("card_grid");
     const maxDisplay = this.parentState.numDisplay;
-    console.log(maxDisplay);
     let currentDisplay = 0;
     for (const card of this.parentState.list) {
       if (maxDisplay === currentDisplay) {

@@ -1,7 +1,6 @@
 import { AbstractView } from "../../common/view.js";
 import onChange from "on-change";
 import { Header } from "../../components/header/header.js";
-import { CardDescription } from "../../components/card-descrition/card-description.js";
 
 export class DescriptionView extends AbstractView {
   state = {
@@ -28,6 +27,7 @@ export class DescriptionView extends AbstractView {
       const data = await this.getCard();
       this.state.card = data.docs[0];
       this.state.loading = false;
+      console.log(data);
     }
   }
   getId() {

@@ -1,0 +1,30 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.625rem;
+  margin-top: 0.625rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  line-height: 1.25rem;
+  gap: 1.05rem;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+.button img {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.active {
+  visibility: visible;
+}
+
+.inactive {
+  visibility: hidden;
+}

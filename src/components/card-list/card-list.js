@@ -1,4 +1,6 @@
 import { DivComponent } from "../../common/div-component";
+import { Card } from "../card/card";
+import { Footer } from "../footer/footer";
 import "./card-list.css";
 
 export class CardList extends DivComponent {
@@ -15,8 +17,19 @@ export class CardList extends DivComponent {
 
       return this.el;
     }
-    this.el.classList.add("card_list");
-    this.el.innerHTML = `<h1>Найденно книг - ${this.parentState.list.length}`;
+    const cardGrid = document.createElement("div");
+    cardGrid.classList.add("card_grid");
+    const maxDisplay = this.parentState.numDisplay;
+    console.log(maxDisplay);
+    let currentDisplay = 0;
+    for (const card of this.parentState.list) {
+      if (maxDisplay === currentDisplay) {
+        break;
+      }
+      cardGrid.append(new Card(this.appState, card).render());
+      currentDisplay++;
+    }
+    this.el.append(cardGrid);
     return this.el;
   }
 }

@@ -15,11 +15,6 @@ export class Footer extends DivComponent {
   }
 
   #isNextActive() {
-    console.log(
-      this.parentState.numFound -
-        this.parentState.offset -
-        this.parentState.numDisplay
-    );
     if (
       this.parentState.numFound -
         this.parentState.offset -

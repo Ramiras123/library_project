@@ -1,6 +1,7 @@
 import { AbstractView } from "../../common/view.js";
 import onChange from "on-change";
 import { Header } from "../../components/header/header.js";
+import { CardDiscription } from "../../components/card-descrition/card-description.js";
 
 export class DescriptionView extends AbstractView {
   state = {
@@ -11,8 +12,14 @@ export class DescriptionView extends AbstractView {
   constructor(appState) {
     super();
     this.appState = appState;
+    this.appState = onChange(this.appState, this.appStateHook.bind(this));
     this.state = onChange(this.state, this.stateHook.bind(this));
     this.setTitle("Книжка");
+  }
+  appStateHook(path) {
+    if (path === "favorites") {
+      this.render();
+    }
   }
 
   async getCard() {
@@ -27,7 +34,9 @@ export class DescriptionView extends AbstractView {
       const data = await this.getCard();
       this.state.card = data.docs[0];
       this.state.loading = false;
-      console.log(data);
+    }
+    if (path === "loading") {
+      this.render();
     }
   }
   getId() {
@@ -36,6 +45,7 @@ export class DescriptionView extends AbstractView {
   render() {
     this.getId();
     const main = document.createElement("div");
+    main.append(new CardDiscription(this.appState, this.state.card, this.state).render());
     this.app.innerHTML = "";
     this.app.append(main);
     this.renderHeader();

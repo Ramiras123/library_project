@@ -1,0 +1,78 @@
+import { DivComponent } from "../../common/div-component";
+import "./card-description.css";
+
+export class CardDiscription extends DivComponent {
+  constructor(appState, cardState, parentState) {
+    super();
+    this.appState = appState;
+    this.cardState = cardState;
+    this.parentState = parentState;
+  }
+
+  #deleteFromFavorites() {
+    this.appState.favorites = this.appState.favorites.filter(
+      (b) => b.key != this.cardState.key
+    );
+  }
+  #addToFavorites() {
+    this.appState.favorites.push(this.cardState);
+  }
+
+  render() {
+    if (this.parentState.loading) {
+      this.el.classList.add("card_list__loading");
+      this.el.innerHTML = `<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>`;
+
+      return this.el;
+    }
+    this.el.classList.add("card");
+    const existInFavorites = this.appState.favorites.find(
+      (b) => b.key === this.cardState.key
+    );
+    this.el.innerHTML = `
+        <div class="card__img"> 
+        <a href="#card?id=${
+          this.cardState.cover_edition_key
+        }"><img src="https://covers.openlibrary.org/b/olid/${
+      this.cardState.cover_edition_key
+    }-M.jpg" alt='Обложка'/></a>
+        </div>
+        <div class="card__info">
+            <div class="card__tag">
+            ${this.cardState.subject ? this.cardState.subject[0] : "Не задано"}
+            </div> 
+            <div class="card__title">
+            ${this.cardState.title}
+            </div>
+            <div class="card__author">
+            ${
+              this.cardState.author_name
+                ? this.cardState.author_name[0]
+                : "Не задано"
+            }
+            </div>
+            <div class="card__footer">
+            <button class="button__add ${
+              existInFavorites ? "button__active" : ""
+            }">
+            ${
+              existInFavorites
+                ? '<img src="/static/favorite-black.svg" />'
+                : '<img src="/static/favorite-white.svg" />'
+            }
+            </button>
+            </div>
+        </div>
+    `;
+    if (existInFavorites) {
+      this.el
+        .querySelector("button")
+        .addEventListener("click", this.#deleteFromFavorites.bind(this));
+    } else {
+      this.el
+        .querySelector("button")
+        .addEventListener("click", this.#addToFavorites.bind(this));
+    }
+    return this.el;
+  }
+}
